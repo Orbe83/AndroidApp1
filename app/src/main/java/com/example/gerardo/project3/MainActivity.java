@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.graphics.Color;
+import android.content.res.Resources;
+import android.util.TypedValue;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,11 +46,22 @@ public class MainActivity extends AppCompatActivity {
         //Se asignan reglas para posicionar username arriba del button, centrado horizontalmente y con un margen de 50 entre los dos
         usernameDetails.addRule(RelativeLayout.ABOVE, button.getId());
         usernameDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        usernameDetails.setMargins(0,0,0,50);
+        usernameDetails.setMargins(0, 0, 0, 50);
 
         //Se asignan reglas para centrar el próximo botón
         buttonDetails.addRule(RelativeLayout.CENTER_HORIZONTAL);
         buttonDetails.addRule(RelativeLayout.CENTER_VERTICAL);
+
+        //Obtener Resources de la aplicación
+        Resources r = getResources();
+
+        //Guardar los pixeles a usar. Mediante el método applyDimension se obtiene la conversión de los DIP que damos a pixeles
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,200,
+                r.getDisplayMetrics()
+                );
+
+        //Se especifica el ancho del EditText username
+        username.setWidth(px);
 
         //Se agrega el widget del botón y username con las reglas a seguir al agregarlos (button y username ahora son hijos de rLayout)
         rLayout.addView(button, buttonDetails);
